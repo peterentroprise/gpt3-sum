@@ -2,7 +2,6 @@ import { Configuration, OpenAIApi } from "openai";
 import { jsonc } from "jsonc";
 export default async function handler(req, res) {
   try {
-    //OpenAI API Call
     const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,
     });
