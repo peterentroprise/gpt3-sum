@@ -69,7 +69,7 @@ export const Form = ({ className, children, ...props }) => {
         </button>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-8 pb-8">
         {usePrompt && (
           <div>
             <label
