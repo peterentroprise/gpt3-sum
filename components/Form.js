@@ -110,6 +110,7 @@ export const Form = ({ className, children, ...props }) => {
           <div className="mt-1">
             <textarea
               onChange={(e) => setCorpus(e.target.value)}
+              rows={8}
               type="text"
               name="corpus"
               id="corpus"
