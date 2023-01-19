@@ -6,14 +6,21 @@ export default async function handler(req, res) {
       apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
+    const prompt = `${req.body.prompt}:
+
+    ${req.body.corpus}`;
     const result = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: req.body.prompt,
-      temperature: req.body.temperature,
-      max_tokens: req.body.maxTokens,
+      prompt: prompt,
+      temperature: parseInt(req.body.temperature),
+      max_tokens: parseInt(req.body.maxTokens),
     });
 
-    console.log(result);
+    if (result.data.error) {
+      console.log(result.data.error);
+    } else {
+      console.log(result.data);
+    }
 
     res.status(200).send(jsonc.stringify(result));
   } catch (err) {

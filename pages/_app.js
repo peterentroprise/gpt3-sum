@@ -5,7 +5,7 @@ function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>GPT3 Demo</title>
+        <title>Retrieve GPT3 Demo</title>
       </Head>
       <Component {...pageProps} />
     </>
