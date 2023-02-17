@@ -46,7 +46,11 @@ export const VideoUploadForm = ({ className, children, ...props }) => {
           Upload
         </button>
       </form>
-      {data && <div>{console.log(data)}</div>}
+      {data && (
+        <div>
+          <p>Distance: {data.distance}</p>
+        </div>
+      )}
     </div>
   );
 };
