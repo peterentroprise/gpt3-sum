@@ -6,9 +6,9 @@ export default async function handler(req, res) {
       apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
-    const prompt = `${req.body.prompt}:
+    const prompt = `${req.body.corpus}:
 
-    ${req.body.corpus}`;
+    ${req.body.prompt}`;
     const result = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
@@ -18,8 +18,6 @@ export default async function handler(req, res) {
 
     if (result.data.error) {
       console.log(result.data.error);
-    } else {
-      console.log(result.data);
     }
 
     res.status(200).send(jsonc.stringify(result));
