@@ -33,14 +33,20 @@ export const GenerateTranscriptForm = ({
   };
 
   return (
-    <div className="space-y-14">
+    <div className="space-y-4 py-8">
       <form
         className="flex flex-wrap gap-4"
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
         <input
-          className="w-full"
+          className="w-full text-sm
+          file:mr-5 file:py-2 file:px-4
+          file:rounded-md file:border-0
+          file:text-sm file:font-medium
+          file:bg-indigo-600 file:text-white
+          hover:file:cursor-pointer hover:file:bg-indigo-700
+          hover:file:text-white"
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
         />

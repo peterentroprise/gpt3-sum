@@ -50,7 +50,7 @@ export const SynthesizedAudioForm = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 py-8">
       <div>
         <label
           htmlFor="voiceId"

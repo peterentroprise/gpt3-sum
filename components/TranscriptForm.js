@@ -29,8 +29,8 @@ export const TranscriptForm = ({ setText, transcript, setTranscript }) => {
   };
 
   return (
-    <div className="space-y-14">
-      <div className="space-y-8 pb-8">
+    <div className="space-y-4 py-8">
+      <div className="space-y-4">
         <div>
           <label
             htmlFor="transcript"

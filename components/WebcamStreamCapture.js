@@ -51,7 +51,7 @@ export const WebcamStreamCapture = () => {
   }, [recordedChunks]);
 
   return (
-    <>
+    <div className="py-8 space-y-4">
       <Webcam audio={true} muted ref={webcamRef} />
       <div className="flex gap-4">
         {capturing ? (
@@ -78,6 +78,6 @@ export const WebcamStreamCapture = () => {
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 };

@@ -16,8 +16,8 @@ const Index = () => {
 
   return (
     <div className="h-screen mx-auto max-w-2xl py-12 px-4">
-      <div className="space-y-8 py-12">
-        <p className="text-4xl font-medium">
+      <div className=" divide-y py-12">
+        <p className="text-4xl font-medium py-8">
           Retrieve Media Transformation Demo
         </p>
         <WebcamStreamCapture />

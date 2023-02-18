@@ -34,12 +34,8 @@ export const TranscriptPolling = ({
       return () => clearInterval(interval);
     }
   }, [pollForTranscript]);
-
-  return (
-    <div className="space-y-14">
-      {pollForTranscript
-        ? "Polling For Transcript Results..."
-        : "Not Polling For Transcript"}
-    </div>
-  );
+  if (pollForTranscript)
+    return (
+      <div className="space-y-4 py-8">Polling For Transcript Results...</div>
+    );
 };
