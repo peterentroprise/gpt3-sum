@@ -9,6 +9,8 @@ export const SynthesizedAudioForm = ({
   const [isLoading, setLoading] = useState(false);
 
   const [audioSrc, setAudioSrc] = useState(null);
+  const [similarity, setSimilarity] = useState(1);
+  const [stability, setStability] = useState(1);
 
   const handleSubmit = (e) => {
     setLoading(true);
@@ -22,6 +24,8 @@ export const SynthesizedAudioForm = ({
       body: JSON.stringify({
         text: text,
         voiceId: voiceId,
+        similarity: similarity,
+        stability: stability,
       }),
     })
       .then((response) => {
@@ -45,8 +49,52 @@ export const SynthesizedAudioForm = ({
     setText(event.target.value);
   };
 
+  const handleSimilarityChange = (event) => {
+    setSimilarity(event.target.value);
+  };
+
+  const handleStabilityChange = (event) => {
+    setStability(event.target.value);
+  };
+
   return (
     <div className="space-y-4 py-8">
+      <div>
+        <label
+          htmlFor="similarity"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Similarity
+        </label>
+        <div className="mt-1">
+          <input
+            type="number"
+            name="similarity"
+            value={similarity}
+            onChangeCapture={handleSimilarityChange}
+            id="similarity"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          />
+        </div>
+      </div>
+      <div>
+        <label
+          htmlFor="stability"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Stability
+        </label>
+        <div className="mt-1">
+          <input
+            type="number"
+            name="stability"
+            value={stability}
+            onChangeCapture={handleStabilityChange}
+            id="stability"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          />
+        </div>
+      </div>
       <div>
         <label
           htmlFor="text"

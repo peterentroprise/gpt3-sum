@@ -23,14 +23,38 @@ export const TranscriptForm = ({ setText, transcript, setTranscript }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("Transcript Data");
+        console.log(data.data);
         setText(data.data.choices[0].text);
         setLoading(false);
       });
   };
 
+  const handleChangePrompt = (event) => {
+    setPrompt(event.target.value);
+  };
+
   return (
     <div className="space-y-4 py-8">
       <div className="space-y-4">
+        <div>
+          <label
+            htmlFor="similarity"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Prompt
+          </label>
+          <div className="mt-1">
+            <input
+              type="text"
+              name="prompt"
+              value={prompt}
+              onChangeCapture={handleChangePrompt}
+              id="prompt"
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+        </div>
         <div>
           <label
             htmlFor="transcript"
