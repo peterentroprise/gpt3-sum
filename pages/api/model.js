@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const openai = new OpenAIApi(configuration);
     const prompt = `${req.body.corpus}:
 
-    ${req.body.prompt}`;
+    ${req.body.prompt}:`;
     const result = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,

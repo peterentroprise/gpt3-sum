@@ -10,7 +10,7 @@ export const VideoUploadForm = ({ className, children, ...props }) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    fetch("http://127.0.0.1:8000/uploadfile", {
+    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/uploadfile/`, {
       method: "POST",
       body: formData,
     })

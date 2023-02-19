@@ -15,7 +15,7 @@ export const TrainModelForm = ({
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", file);
-    fetch("http://127.0.0.1:8000/trainModel", {
+    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/trainModel/`, {
       method: "POST",
       body: formData,
     })

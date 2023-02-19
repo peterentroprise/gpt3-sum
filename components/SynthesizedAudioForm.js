@@ -14,7 +14,7 @@ export const SynthesizedAudioForm = ({
     setLoading(true);
     setAudioSrc(null);
     e.preventDefault();
-    fetch("http://127.0.0.1:8000/synthesizeAudio", {
+    fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/synthesizeAudio/`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -41,34 +41,12 @@ export const SynthesizedAudioForm = ({
       });
   };
 
-  const handleVoiceIdChange = (event) => {
-    setVoiceId(event.target.value);
-  };
-
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
 
   return (
     <div className="space-y-4 py-8">
-      <div>
-        <label
-          htmlFor="voiceId"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Voice Id
-        </label>
-        <div className="mt-1">
-          <input
-            value={voiceId}
-            onChange={handleVoiceIdChange}
-            type="text"
-            name="voiceId"
-            id="voiceId"
-            className="disabled:opacity-25 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-        </div>
-      </div>
       <div>
         <label
           htmlFor="text"
