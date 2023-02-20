@@ -24,8 +24,8 @@ export const SynthesizedAudioForm = ({
       body: JSON.stringify({
         text: text,
         voiceId: voiceId,
-        similarity: similarity,
-        stability: stability,
+        similarity: parseFloat(similarity),
+        stability: parseFloat(stability),
       }),
     })
       .then((response) => {

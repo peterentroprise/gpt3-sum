@@ -33,8 +33,6 @@ export const TrainModelForm = ({
       });
   };
 
-  console.log(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/trainModel/`);
-
   return (
     <div className="space-y-4 py-8">
       <form
