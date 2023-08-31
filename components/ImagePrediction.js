@@ -50,8 +50,53 @@ export const ImagePrediction = ({}) => {
     if (stream) {
       stream.getTracks().forEach(track => track.stop());
       setStream(null);
+      setCounter(0)
       setShouldRequest(true)
     }
+  };
+
+  const handleSave = async () => {
+    if (videoRef.current) {
+
+      const video = videoRef.current;
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+
+      canvas.toBlob(async(blob) => {
+
+      const screenshotFile = new File([blob], 'screenshot.png', { type: 'image/png' });
+      const formData = new FormData();
+      formData.append('file', screenshotFile);
+  
+      try {
+    
+        const response = await fetch('https://entroprise.ngrok.io/upload/save/', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (response.ok) {
+          const responseData = await response.blob();
+          setResponseImage(URL.createObjectURL(responseData));
+          setShouldRequest(true)
+  
+        } else {
+          console.error('Error uploading image');
+        }
+      } catch (error) {
+        console.error('Error uploading image', error);
+      }
+
+      });
+      
+    }
+
+  
   };
 
   const handleUpload = async () => {
@@ -101,20 +146,21 @@ export const ImagePrediction = ({}) => {
 
   return (
     <div className="space-y-4 py-8">
-        <p>Counter: {counter}</p>
-        <p>Ready For Request: {shouldRequest ? "true" : "false"}</p>
+      <div className='flex gap-4'> <p>Frame Counter: {counter}</p>
+        <p>Processing Request: {shouldRequest ? "False" : "True"}</p></div>
 
-      {responseImage && (
+    <div className='space-x-4'>
+      <button disabled={stream} className="disabled:opacity-25 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={startCapture}>Start Screenshare</button>
+      <button disabled={!stream} className="disabled:opacity-25 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={stopCapture}>Stop Screenshare</button>
+      <button disabled={!videoRef.current} className="disabled:opacity-25 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={handleSave}>Save Screenshot For Training</button>
+    </div>
+    {responseImage && (
         <div>
           <img src={responseImage} alt="Response" />
         </div>
       )}
-    <div className='space-x-4'>
-      <button disabled={stream} className="disabled:opacity-25 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={startCapture}>Start Screenshare</button>
-      <button disabled={!stream} className="disabled:opacity-25 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" onClick={stopCapture}>Stop Screenshare</button>
-      <video className="hidden" ref={videoRef} autoPlay playsInline controls />
-    </div>
-
+      <div className="hidden"> <video  ref={videoRef} autoPlay playsInline controls /></div>
+   
     </div>
   );
 };
